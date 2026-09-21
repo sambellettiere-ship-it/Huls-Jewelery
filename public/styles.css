@@ -2,17 +2,37 @@
    bright green field, yellow retro daisies, whimsical rounded lettering. */
 
 :root {
-  --green-deep: #2f7d32;
-  --green: #4aa73c;
-  --green-bright: #6cc04a;
-  --green-pale: #eaf6e2;
-  --yellow: #ffd500;
-  --yellow-deep: #f2b705;
-  --red: #e8442b;
-  --ink: #24331f;
-  --ink-soft: #46543d;
+  /* Palette drawn from the hand-drawn sunflower pattern:
+     golden amber ground, sunflower gold petals, dark-brown centers,
+     leaf green, wheat, and a dusty-blue accent. */
+  --gold: #f5a81c; /* amber background of the pattern */
+  --gold-deep: #d98b0a;
+  --sunflower: #f3a81e; /* petal gold */
+  --sunflower-deep: #c77a0c;
+
+  /* Greens (the sunflower leaves) — kept as the secondary accent */
+  --green-deep: #0e7a30;
+  --green: #14893a;
+  --green-bright: #23a34a;
+
+  /* Warm creams used for content panels over the pattern */
+  --cream: #fff7e4;
+  --cream-soft: #fdeecb;
+  --green-pale: #fdf1d4; /* legacy name: now a soft cream for inputs/thumbs */
+
+  /* Sunflower gold reused under the old "yellow" names (buttons, accents) */
+  --yellow: #f3a81e;
+  --yellow-deep: #c77a0c;
+
+  --wheat: #c7b24e;
+  --blue-accent: #8fa9c9;
+
+  --red: #c0491f; /* rust — signals "sold" / delete, warm-palette friendly */
+
+  --ink: #2e2318; /* dark seed-brown, used for body text */
+  --ink-soft: #6e5638;
   --white: #ffffff;
-  --shadow: 0 8px 24px rgba(28, 60, 22, 0.14);
+  --shadow: 0 10px 26px rgba(74, 46, 10, 0.18);
   --radius: 16px;
   --font-display: "Fredoka", "Comic Sans MS", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
@@ -37,8 +57,25 @@ body {
   margin: 0;
   font-family: var(--font-body);
   color: var(--ink);
-  background: var(--green-pale);
+  /* The sunflower pattern is the page backdrop; content sits on cream sheets. */
+  background: var(--gold) url("/images/sunflower-pattern.webp") center top / cover
+    no-repeat fixed;
   line-height: 1.6;
+}
+
+/* Fixed backgrounds are janky on many mobile browsers — scroll + tile there. */
+@media (max-width: 760px) {
+  body {
+    background-attachment: scroll;
+    background-size: 700px auto;
+    background-repeat: repeat;
+  }
+}
+
+/* The admin panel is a work tool — a calm cream background beats the busy
+   pattern for readability, while staying on-brand. */
+body.admin-page {
+  background: var(--cream);
 }
 
 a {
@@ -52,20 +89,23 @@ a {
   overflow: hidden;
   padding: clamp(3rem, 8vw, 6rem) 1rem clamp(3.5rem, 9vw, 6rem);
   text-align: center;
-  color: var(--white);
-  background: radial-gradient(
-      120% 120% at 50% 0%,
-      var(--green-bright) 0%,
-      var(--green) 45%,
-      var(--green-deep) 100%
-    );
+  color: var(--ink);
+  /* Transparent so the sunflower pattern shows through behind the hero. */
+  background: transparent;
 }
 
 .hero__inner {
   position: relative;
   z-index: 2;
-  max-width: 720px;
+  max-width: 680px;
   margin: 0 auto;
+  /* A translucent cream panel keeps the hero text readable over the pattern. */
+  background: rgba(255, 247, 228, 0.9);
+  border: 3px solid var(--sunflower);
+  border-radius: 26px;
+  padding: clamp(1.75rem, 5vw, 2.75rem) clamp(1.5rem, 5vw, 3rem);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(2px);
 }
 
 .hero__eyebrow {
@@ -74,7 +114,7 @@ a {
   font-size: clamp(1.1rem, 3vw, 1.4rem);
   margin: 0 0 0.25rem;
   letter-spacing: 0.02em;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  color: var(--green-deep);
 }
 
 .hero__title {
@@ -83,22 +123,20 @@ a {
   font-size: clamp(2.4rem, 8vw, 4rem);
   margin: 0.2rem 0 0.6rem;
   line-height: 1.05;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
+  color: var(--ink);
 }
 
 .hero__tagline {
   font-size: clamp(1rem, 2.6vw, 1.3rem);
   margin: 0 auto 1.6rem;
   max-width: 34ch;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.22);
+  color: var(--ink-soft);
 }
 
-/* Decorative daisies scattered in the hero */
+/* Decorative daisies are no longer needed — the sunflower pattern behind the
+   hero provides the florals. */
 .hero__flowers {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
+  display: none;
 }
 
 .flower {
@@ -186,6 +224,16 @@ a {
   padding: clamp(2.5rem, 6vw, 4rem) 1rem;
 }
 
+/* Gallery content sits on a cream sheet so text stays readable over the pattern. */
+#gallery {
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1rem, 4vw, 2.5rem);
+  background: rgba(255, 247, 228, 0.94);
+  border-radius: 28px;
+  border: 2px solid var(--cream-soft);
+  box-shadow: var(--shadow);
+}
+
 .section__title {
   font-family: var(--font-display);
   font-weight: 700;
@@ -203,9 +251,10 @@ a {
 }
 
 .section--contact {
-  background: var(--white);
+  background: var(--cream);
   max-width: none;
-  border-top: 6px solid var(--yellow);
+  border-top: 6px solid var(--sunflower);
+  border-bottom: 6px solid var(--sunflower);
 }
 
 .section--contact > * {
@@ -359,11 +408,12 @@ a {
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 0.7rem 0.85rem;
-  border: 2px solid #d5e6cb;
+  border: 2px solid #ecd9ab;
   border-radius: 12px;
   background: var(--green-pale);
   color: var(--ink);
@@ -371,9 +421,10 @@ a {
 }
 
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
-  border-color: var(--green);
+  border-color: var(--gold-deep);
   background: var(--white);
 }
 
@@ -433,8 +484,8 @@ a {
 /* --- Footer ------------------------------------------------------------- */
 
 .footer {
-  background: var(--green-deep);
-  color: var(--white);
+  background: var(--ink);
+  color: var(--cream);
   text-align: center;
   padding: 1.5rem 1rem;
   font-size: 0.9rem;

@@ -180,7 +180,11 @@ function toPublic(piece) {
 }
 
 app.get('/api/pieces', (_req, res) => {
-  res.json(db.listAvailable().map(toPublic));
+  // Show every piece on the public gallery, available ones first, with sold
+  // pieces kept (and badged by the front end) as social proof.
+  const all = db.listAll();
+  all.sort((a, b) => (a.status === 'sold' ? 1 : 0) - (b.status === 'sold' ? 1 : 0));
+  res.json(all.map(toPublic));
 });
 
 // --- Admin API (protected) ----------------------------------------------
