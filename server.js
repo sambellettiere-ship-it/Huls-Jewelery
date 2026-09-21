@@ -20,7 +20,10 @@ const IS_PROD = process.env.NODE_ENV === 'production';
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const SESSION_SECRET = process.env.SESSION_SECRET;
-const FORMSPREE_FORM_ID = process.env.FORMSPREE_FORM_ID || '';
+// Formspree form ID for the contact/inquiry form. Not secret (it appears in the
+// public form action), so we ship Debbie's real form as the default and still
+// allow overriding it via the environment.
+const FORMSPREE_FORM_ID = process.env.FORMSPREE_FORM_ID || 'xbglodve';
 
 // --- Fail fast on misconfiguration --------------------------------------
 

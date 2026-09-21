@@ -63,19 +63,22 @@ under `DATA_DIR` (default `./data` locally, `/data` on Railway).
 
 ## Formspree setup
 
-The contact form posts to Formspree, so inquiries land in Debbie's inbox without a backend
-email service.
+The contact form posts to Formspree (via a small vanilla-JS AJAX `fetch`), so inquiries
+land in Debbie's inbox without a backend email service.
 
-1. Sign up at https://formspree.io (the free tier is fine for low volume).
-2. Create a new form (set the recipient to `Debbiehuls@aol.com`).
-3. Formspree gives you an endpoint like `https://formspree.io/f/abcdwxyz`. The part after
-   `/f/` (here `abcdwxyz`) is your **form ID**.
-4. Set `FORMSPREE_FORM_ID=abcdwxyz` in your environment (locally in `.env`, on Railway as a
-   service variable).
-5. The first time a message is submitted, Formspree emails you to confirm the address.
+**It's already wired up.** The site ships with Debbie's form
+(`https://formspree.io/f/xbglodve`) as the built-in default, so the contact form works out
+of the box with no configuration. The very first time a message is submitted, Formspree
+emails the form owner once to confirm the address.
 
-If `FORMSPREE_FORM_ID` is not set, the form stays visible but tells visitors to call or
-email instead.
+To point the form at a **different** Formspree form later:
+
+1. Create a form at https://formspree.io (free tier is fine for low volume) with the
+   recipient set to the desired inbox.
+2. Copy the ID from the endpoint URL `https://formspree.io/f/XXXXXXXX` (the part after
+   `/f/`).
+3. Set `FORMSPREE_FORM_ID=XXXXXXXX` in your environment (locally in `.env`, on Railway as a
+   service variable). This overrides the default.
 
 ---
 
@@ -140,9 +143,7 @@ railway.json         Railway start command
 | ------------------- | -------- | ------- | -------------------------------------------------- |
 | `ADMIN_PASSWORD`    | Yes      | —       | Password for the `/admin` panel                    |
 | `SESSION_SECRET`    | Prod     | —       | Signs the login session cookie                     |
-| `FORMSPREE_FORM_ID` | No\*     | —       | Formspree form ID for the contact form             |
+| `FORMSPREE_FORM_ID` | No       | `xbglodve` | Formspree form ID; overrides the built-in default  |
 | `DATA_DIR`          | No       | `data`  | Where SQLite + uploads are stored (`/data` on Railway) |
 | `NODE_ENV`          | No       | —       | Set to `production` on Railway (secure cookies)    |
 | `PORT`              | No       | `3000`  | Set automatically by Railway                       |
-
-\* Not required to boot, but the contact form needs it to actually send messages.
