@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Manage Pieces — Jewelry With A Past</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%23ffd500'%3E%3Ccircle cx='16' cy='6' r='5'/%3E%3Ccircle cx='16' cy='26' r='5'/%3E%3Ccircle cx='6' cy='16' r='5'/%3E%3Ccircle cx='26' cy='16' r='5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='5' fill='%23e8442b'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <!-- Login view -->
+    <div id="login-view" class="login-box" hidden>
+      <h1>Owner Login</h1>
+      <form id="login-form" class="contact-form">
+        <div id="login-message" class="form-message"></div>
+        <label class="field">
+          <span class="field__label">Password</span>
+          <input type="password" name="password" id="login-password" required autofocus />
+        </label>
+        <button type="submit" class="btn btn--primary">Log in</button>
+      </form>
+      <p class="muted" style="text-align: center; margin-top: 1rem">
+        <a href="/">&larr; Back to the website</a>
+      </p>
+    </div>
+
+    <!-- Admin panel view -->
+    <div id="panel-view" class="admin-wrap" hidden>
+      <div class="admin-header">
+        <h1>Manage Pieces</h1>
+        <div class="field-inline">
+          <a class="btn btn--ghost" href="/" target="_blank" rel="noopener">View site</a>
+          <button type="button" class="btn btn--danger" id="logout-btn">Log out</button>
+        </div>
+      </div>
+
+      <div id="admin-message" class="admin-message"></div>
+
+      <!-- Add / edit form -->
+      <section class="panel">
+        <h2 id="form-heading">Add a piece</h2>
+        <form id="piece-form" class="contact-form">
+          <input type="hidden" name="id" id="piece-id" />
+
+          <label class="field">
+            <span class="field__label">Title *</span>
+            <input type="text" name="title" id="f-title" required placeholder="e.g. Vintage gold locket" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Description</span>
+            <textarea name="description" id="f-description" rows="3" placeholder="Condition, era, materials, size…"></textarea>
+          </label>
+
+          <div class="form-row">
+            <label class="field">
+              <span class="field__label">Price</span>
+              <input type="text" name="price" id="f-price" placeholder="$45, Make an offer, etc." />
+            </label>
+            <label class="field">
+              <span class="field__label">Status</span>
+              <select name="status" id="f-status" class="field">
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field__label">Photo</span>
+            <input type="file" name="image" id="f-image" accept="image/*" />
+            <span class="muted" id="current-image-note"></span>
+          </label>
+
+          <label class="field-inline" id="remove-image-row" hidden>
+            <input type="checkbox" id="f-remove-image" />
+            <span>Remove the current photo</span>
+          </label>
+
+          <div class="field-inline">
+            <button type="submit" class="btn btn--primary" id="save-btn">Add piece</button>
+            <button type="button" class="btn btn--ghost" id="cancel-edit" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Existing pieces -->
+      <section class="panel">
+        <h2>Current pieces</h2>
+        <p class="muted" id="list-status">Loading…</p>
+        <ul class="admin-list" id="admin-list"></ul>
+      </section>
+    </div>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>

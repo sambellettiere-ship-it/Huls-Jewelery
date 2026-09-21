@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jewelry With A Past — Debbie Huls</title>
+    <meta
+      name="description"
+      content="Jewelry With A Past — Debbie Huls buys and resells jewelry and some retro glassware. Browse pieces for sale and get in touch."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%23ffd500'%3E%3Ccircle cx='16' cy='6' r='5'/%3E%3Ccircle cx='16' cy='26' r='5'/%3E%3Ccircle cx='6' cy='16' r='5'/%3E%3Ccircle cx='26' cy='16' r='5'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='5' fill='%23e8442b'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__flowers" aria-hidden="true">
+        <span class="flower flower--1"></span>
+        <span class="flower flower--2"></span>
+        <span class="flower flower--3"></span>
+        <span class="flower flower--4"></span>
+      </div>
+      <div class="hero__inner">
+        <p class="hero__eyebrow">Debbie Huls</p>
+        <h1 class="hero__title">Jewelry With A Past</h1>
+        <p class="hero__tagline">
+          I buy and resell jewelry and some retro glassware. Browse the pieces below —
+          and give me a call!
+        </p>
+        <a class="btn btn--primary" href="#gallery">See what's for sale</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="gallery" class="section">
+        <h2 class="section__title">Pieces For Sale</h2>
+        <p class="section__lead">
+          Each piece is one of a kind. See something you love? Use the form below or give
+          me a call to ask about it.
+        </p>
+
+        <div id="gallery-status" class="gallery-status" role="status">Loading pieces…</div>
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="contact" class="section section--contact">
+        <h2 class="section__title">Ask About a Piece</h2>
+        <p class="section__lead">
+          Send a message and I'll get back to you, or reach me directly by phone or email.
+        </p>
+
+        <div class="contact-layout">
+          <form id="contact-form" class="contact-form" novalidate>
+            <div id="form-message" class="form-message" role="status"></div>
+
+            <label class="field">
+              <span class="field__label">Piece you're asking about</span>
+              <input
+                type="text"
+                name="Piece"
+                id="piece-field"
+                placeholder="(optional — filled in when you click “Inquire”)"
+                readonly
+              />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Your name</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Your email</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+
+            <label class="field">
+              <span class="field__label">Message</span>
+              <textarea name="message" rows="5" required placeholder="I'm interested in…"></textarea>
+            </label>
+
+            <button type="submit" class="btn btn--primary" id="contact-submit">
+              Send message
+            </button>
+          </form>
+
+          <aside class="contact-card">
+            <h3 class="contact-card__name">Debbie Huls</h3>
+            <p class="contact-card__line">
+              <a href="tel:+12174807083">217-480-7083</a>
+            </p>
+            <p class="contact-card__line">
+              <a href="mailto:Debbiehuls@aol.com">Debbiehuls@aol.com</a>
+            </p>
+            <p class="contact-card__note">Jewelry With A Past — give me a call!</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; <span id="year"></span> Jewelry With A Past · Debbie Huls</p>
+      <p class="footer__admin"><a href="/admin">Owner login</a></p>
+    </footer>
+
+    <script src="/config.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
