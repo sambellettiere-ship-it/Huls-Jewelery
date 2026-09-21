@@ -1,0 +1,11 @@
+# Pin the Node.js runtime so native modules (better-sqlite3) use their
+# prebuilt binaries instead of compiling from source. better-sqlite3
+# publishes prebuilds up to Node 22; Nixpacks otherwise defaults to the
+# newest Node, which has no prebuild and forces a node-gyp compile.
+#
+# Python and a C/C++ toolchain are included as a fallback so that if a
+# native module ever does need to build from source, node-gyp can run.
+providers = ['node']
+
+[phases.setup]
+nixPkgs = ['nodejs_22', 'npm-9_x', 'python3', 'gcc', 'gnumake']
